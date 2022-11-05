@@ -1,10 +1,9 @@
 import React from 'react';
+import ResponsiveAppBar from './reusable/AppBar';
 
 const Navbar = () => {
   return (
-    <div>
-      
-    </div>
+      <ResponsiveAppBar />
   );
 }
 
