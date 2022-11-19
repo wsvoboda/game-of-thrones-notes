@@ -11,14 +11,16 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import dragon from '../../assets/dragon.png';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../redux/userDetailsSlice';
 
-// const loggedInPages = [
-//   { label: 'Home', route: '/' },
-//   { label: 'Character Search', route: '/search/characters' },
-//   { label: 'My Favorites', route: '/favorites' },
-//   { label: 'Profile', route: '/profile' },
-//   { label: 'Logout', route: '/' },
-// ];
+const loggedInPages = [
+  { label: 'Home', route: '/' },
+  { label: 'Character Search', route: '/search/characters' },
+  { label: 'My Favorites', route: '/favorites' },
+  { label: 'Profile', route: '/profile' },
+  { label: 'Logout', route: '/' },
+];
 
 const loggedOutPages = [
   { label: 'Character Search', route: '/search/characters' },
@@ -27,7 +29,8 @@ const loggedOutPages = [
 ];
 
 const ResponsiveAppBar = () => {
-  // const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -35,8 +38,13 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(e.currentTarget);
   };
 
-  const handleCloseNavMenu = (route) => {
-    if (route) return navigate(route);
+  const handleCloseNavMenu = (page) => {
+    if (page) {
+      if (page.label === 'Logout') {
+        dispatch(logoutUser())
+      } 
+      navigate(page.route);
+    }
     setAnchorElNav(null);
   };
 
@@ -80,8 +88,13 @@ const ResponsiveAppBar = () => {
                 sx={{
                   display: { xs: 'block', md: 'none' },
                 }}>
-                {loggedOutPages.map((page) => (
-                  <MenuItem key={page.label} onClick={() => handleCloseNavMenu(page.route)}>
+                {isLoggedIn && loggedInPages.map((page) => (
+                  <MenuItem key={page.label} onClick={() => handleCloseNavMenu(page)}>
+                    <Typography textAlign='center'>{page.label}</Typography>
+                  </MenuItem>
+                ))}
+                {!isLoggedIn && loggedOutPages.map((page) => (
+                  <MenuItem key={page.label} onClick={() => handleCloseNavMenu(page)}>
                     <Typography textAlign='center'>{page.label}</Typography>
                   </MenuItem>
                 ))}
@@ -94,10 +107,18 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'none', md: 'flex' },
                 justifyContent: 'flex-end',
               }}>
-              {loggedOutPages.map((page) => (
+              {isLoggedIn && loggedInPages.map((page) => (
                 <Button
                   key={page.label}
-                  onClick={() => handleCloseNavMenu(page.route)}
+                  onClick={() => handleCloseNavMenu(page)}
+                  sx={{ my: 2, color: 'white', display: 'block' }}>
+                  {page.label}
+                </Button>
+              ))}
+              {!isLoggedIn && loggedOutPages.map((page) => (
+                <Button
+                  key={page.label}
+                  onClick={() => handleCloseNavMenu(page)}
                   sx={{ my: 2, color: 'white', display: 'block' }}>
                   {page.label}
                 </Button>

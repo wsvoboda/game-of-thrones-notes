@@ -18,7 +18,10 @@ export const userDetailsSlice = createSlice({
       state.email = action.payload.email;
     },
     logoutUser: (state) => {
-      state = initialState;
+      state.isLoggedIn = false;
+      state.firstName = '';
+      state.lastName = '';
+      state.email = '';
     }
   },
 });
