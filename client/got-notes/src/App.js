@@ -5,6 +5,7 @@ import Intro from './components/Intro';
 import Favorites from './components/Favorites';
 import CharacterSearch from './components/CharacterSearch';
 import Profile from './components/Profile';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Navbar />} >
           <Route index element={<Intro />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/favorites' element={<Favorites />} />
           <Route path='/search/characters' element={<CharacterSearch />} />
           <Route path='/profile' element={<Profile />} />

@@ -9,3 +9,19 @@
   width: 100px;
   margin-right: 24px;
 }
+
+.register-link-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 24px;
+}
+
+.register-link {
+  cursor: pointer;
+  color: rgba(142, 40, 38);
+  margin-left: 8px;
+}
+
+.login-container {
+  margin: 2% 0;
+}

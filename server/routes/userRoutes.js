@@ -31,7 +31,7 @@ router.post('/register', async (req, res) => {
     firstName, 
     lastName, 
     email, 
-    password
+    password1
   } = req.body
   
   const existingUser = await User.findOne({
@@ -45,7 +45,7 @@ router.post('/register', async (req, res) => {
   }
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10)
+    const hashedPassword = await bcrypt.hash(password1, 10)
     const newUser = await User.create({
       firstName: firstName,
       lastName: lastName,
