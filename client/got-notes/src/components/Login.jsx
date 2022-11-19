@@ -12,10 +12,13 @@ import {
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../redux/userDetailsSlice';
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isLoggingIn, setIsLoggingIn] = useState(true);
   const [passwordMatchMessage, setPasswordMatchMessage] = useState(false)
   const [passwordMessage, setPasswordMessage] = useState(false);
@@ -58,6 +61,7 @@ const Login = () => {
       if (data.message) {
         setPasswordMessage(true)
       } else {
+        dispatch(loginUser(data));
         navigate('/')
       }
     } else {
@@ -75,6 +79,7 @@ const Login = () => {
         if (data.message) {
           setRegisterMessage(true)
         } else {
+          dispatch(loginUser(data))
           navigate('/')
         }
       }
