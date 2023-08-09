@@ -7,7 +7,6 @@
 .dragon-logo {
   height: 110px;
   width: 100px;
-  margin-right: 24px;
 }
 
 .register-link-container {
@@ -24,4 +23,5 @@
 
 .login-container {
   margin: 2% 0;
+  width: 100%;
 }

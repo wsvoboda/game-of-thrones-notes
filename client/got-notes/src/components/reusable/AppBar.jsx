@@ -53,7 +53,7 @@ const ResponsiveAppBar = () => {
       <AppBar
         position='static'
         sx={{ backgroundColor: '#7C747C', boxShadow: 'none' }}>
-        <Container maxWidth='xl'>
+        <Container maxWidth='none'>
           <Toolbar disableGutters>
             <img src={dragon} alt='logo' className='dragon-logo' />
             <Box
